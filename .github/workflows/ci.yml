@@ -1,0 +1,101 @@
+name: CI
+on:  # yamllint disable-line rule:truthy
+  push:
+  pull_request:
+env:
+  USE_DOCKER: true
+jobs:
+  test:
+    runs-on: ["${{ matrix.os }}"]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install -U pip docker-compose
+
+      - name: Unit tests
+        run: |
+          make test
+
+      - name: Publish coverage to codecov.io.
+        uses: codecov/codecov-action@v2
+        if: ${{ !env.ACT }}
+        with:
+          fail_ci_if_error: true
+          files: ./coverage.xml
+          verbose: true
+  lint:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install -U pip docker-compose
+
+      - name: Run linters.
+        run: |
+          make lint
+  check_cc_and_requirements:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+
+      - name: Check that requirements are up-to-date.
+        run: |
+          make check-requirements
+
+      - name: Check that this project is up-to-date with cookiecutter.
+        run: |
+          make check-cc
+  publish:
+    runs-on: [ubuntu-latest]
+    needs:
+      - test
+      - lint
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install pypa/build
+        run: |
+          python -m pip install --user build setuptools_scm
+
+      - name: Build a binary wheel and a source tarball
+        run: |
+          python -m build --sdist --wheel --outdir dist/
+
+      - name: Build wheels
+        run: |
+          python setup.py sdist
+
+      - name: Build docs and publish them back to the master branch if necessary.
+        if: github.repository == 'bbugyi200/result' && github.ref == 'refs/heads/master'
+        run: |
+          ./bin/publish_docs
+
+      - name: Publish distribution to PyPI
+        if: github.repository == 'bbugyi200/result' && startsWith(github.ref, 'refs/tags')
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          skip_existing: true

@@ -1,0 +1,35 @@
+- name: "Type: Bug"
+  color: "ee0701"
+  description: "Something isn't working as expected."
+
+- name: "Type: CI"
+  color: "5319e7"
+  description: "Related to this project's continuous integration pipeline."
+
+- name: "Type: Documentation"
+  color: "f9d0c4"
+  description: "Improvements or additions to this project's documentation."
+
+- name: "Type: Feature"
+  color: "1d76db"
+  description: "New feature or request."
+
+- name: "Type: Miscellaneous"
+  color: "fbca04"
+  description: "None of the other type labels work."
+
+- name: "Type: Question"
+  color: "d530b2"
+  description: "Ask a question about the project."
+
+- name: "Type: Refactor"
+  color: "d13a76"
+  description: "Cleanup the project without changing behavior."
+
+- name: "Type: Security"
+  color: "000000"
+  description: "A security vulnerability has been discovered."
+
+- name: "Type: Tests"
+  color: "74ff49"
+  description: "Improvements or additions to this project's test suite."

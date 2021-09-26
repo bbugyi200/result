@@ -1,0 +1,22 @@
+{
+  "template": "https://github.com/bbugyi200/cc-python",
+  "commit": "665cd1ed2fe0abdf349a5370a23e5b8ec098b4f9",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "author": "Bryan M Bugyi",
+      "email": "bryanbugyi34@gmail.com",
+      "github_username": "bbugyi200",
+      "git_org_name": "bbugyi200",
+      "git_repo_name": "result",
+      "package_name": "result",
+      "pypi_package_name": "python-result",
+      "read_the_docs_domain": "result",
+      "package_description": "A simple Rust like Result type for Python 3. Fully type annotated.",
+      "package_type": "library",
+      "_template": "https://github.com/bbugyi200/cc-python",
+      "package_path": "result"
+    }
+  },
+  "directory": null
+}

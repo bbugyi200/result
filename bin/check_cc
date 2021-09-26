@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#################################################################################
+# Check if this project is up-to-date with the cookiecutter that generated it.
+#################################################################################
+
+SCRIPTNAME="$(basename "$0")"
+
+function run() {
+    if [[ -n "${CC_REPO_URL}" ]] && [[ -f .cruft.json ]]; then
+        perl -i -nE \
+            "print s{\"template\":.*}{\"template\": \"${CC_REPO_URL}\",}gr" \
+            .cruft.json
+    fi
+    
+    if cruft check --not-strict -c master; then
+        printf "%s: This project is up-to-date with the 'master' branch.\n" \
+            "${SCRIPTNAME}"
+    else
+        printf "%s: This project is NOT up-to-date with the 'master' branch.\n" \
+            "${SCRIPTNAME}"
+        if cruft check --not-strict -c stable; then
+            printf "%s: This project is up-to-date with the 'stable' branch.\n" \
+                "${SCRIPTNAME}"
+        else
+            printf "%s: Your project is NOT up-to-date with the 'stable' branch. Run 'make update-cc' to update your project.\n" \
+                "${SCRIPTNAME}"
+            return 1
+        fi
+    fi
+}
+
+if [[ "${SCRIPTNAME}" == "$(basename "${BASH_SOURCE[0]}")" ]]; then
+    run "$@"
+fi

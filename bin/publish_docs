@@ -1,0 +1,44 @@
+#!/bin/bash
+
+SCRIPTNAME="$(basename "$0")"
+
+function run() {
+    if [[ "$1" == "-n" || "$1" == "--dry-run" ]]; then
+        DRY_RUN=true
+        shift
+    fi
+
+    make build-docs
+
+    git add -v docs/source/*
+    local changed_files="$(git diff --name-only --staged | tr '\n' ' ')"
+
+    if [[ " ${changed_files} " == *" docs/source/"* ]]; then
+        printf "%s: New API docs need to be pushed to master | %s\n" \
+            "${SCRIPTNAME}" \
+            "${changed_files}"
+
+        unsafe_cmd git config --global user.name "GitHub CI Workflow"
+        unsafe_cmd git config --global user.email "bryanbugyi34@gmail.com"
+
+        unsafe_cmd git add -v docs/source/*.rst
+        unsafe_cmd git commit -m "Refresh documentation by running \`make build-docs\`"
+        unsafe_cmd git push
+    else
+        printf "%s: API docs are all present.\n" \
+            "${SCRIPTNAME}"
+    fi
+}
+
+function unsafe_cmd() {
+    if [[ "${DRY_RUN}" == true ]]; then
+        local dry_run=" (dry run)"
+    else
+        "$@"
+    fi
+    printf "%s%s: %s\n" "${SCRIPTNAME}" "${dry_run}" "$*"
+}
+
+if [[ "${SCRIPTNAME}" == "$(basename "${BASH_SOURCE[0]}")" ]]; then
+    run "$@"
+fi
