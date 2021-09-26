@@ -5,7 +5,7 @@ from typing import Iterator, List
 from setuptools import find_namespace_packages, setup
 
 
-DESCRIPTION = "A simple Rust like Result type for Python 3. Fully type annotated."
+DESCRIPTION = "A fully type-annotated Rust-like Result type for Python."
 
 
 def long_description() -> str:

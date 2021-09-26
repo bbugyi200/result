@@ -3,7 +3,7 @@
 Welcome to result's documentation!
 ==================================
 
-A simple Rust like Result type for Python 3. Fully type annotated.
+A fully type-annotated Rust-like Result type for Python.
 
 .. toctree::
    :maxdepth: -1

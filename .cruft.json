@@ -12,7 +12,7 @@
       "package_name": "result",
       "pypi_package_name": "python-result",
       "read_the_docs_domain": "result",
-      "package_description": "A simple Rust like Result type for Python 3. Fully type annotated.",
+      "package_description": "A fully type-annotated Rust-like Result type for Python.",
       "package_type": "library",
       "_template": "https://github.com/bbugyi200/cc-python",
       "package_path": "result"

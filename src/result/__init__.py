@@ -1,4 +1,4 @@
-"""A simple Rust like Result type for Python 3. Fully type annotated."""
+"""A fully type-annotated Rust-like Result type for Python."""
 
 __author__ = "Bryan M Bugyi"
 __email__ = "bryanbugyi34@gmail.com"
