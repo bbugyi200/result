@@ -61,6 +61,6 @@ setup(
     test_suite="tests",
     tests_require=tests_require(),
     url="https://github.com/bbugyi200/result",
-    use_scm_version={"fallback_version": "0.1.0"},
+    use_scm_version={"fallback_version": "0.2.0"},
     zip_safe=False,
 )
