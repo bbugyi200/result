@@ -175,7 +175,7 @@ Result = Union[Ok[T, E], Err[T, E]]
 
 def return_lazy_result(
     func: Callable[..., Result[T, E]]
-) -> Callable[..., "_LazyResult[T, E]"]:
+) -> Callable[..., "LazyResult[T, E]"]:
     """Converts the return type of a function from result to a "lazy" result.
 
     In order to fetch the real return type from lazy_result, you must call
@@ -188,13 +188,15 @@ def return_lazy_result(
     """
 
     @wraps(func)
-    def wrapper(*args: Any, **kwargs: Any) -> _LazyResult[T, E]:
-        return _LazyResult(func, *args, **kwargs)
+    def wrapper(*args: Any, **kwargs: Any) -> LazyResult[T, E]:
+        return LazyResult(func, *args, **kwargs)
 
     return wrapper
 
 
-class _LazyResult(_ResultMixin[T, E]):
+class LazyResult(_ResultMixin[T, E]):
+    """See `help(return_lazy_result)`."""
+
     def __init__(
         self, func: Callable[..., Result[T, E]], *args: Any, **kwargs: Any
     ) -> None:
@@ -204,19 +206,19 @@ class _LazyResult(_ResultMixin[T, E]):
 
         self._result: Optional[Result[T, E]] = None
 
-    def result(self) -> Result[T, E]:
+    def result(self) -> Result[T, E]:  # noqa: D102
         if self._result is None:
             self._result = self._func(*self._args, **self._kwargs)
         return self._result
 
-    def err(self) -> Optional[E]:
+    def err(self) -> Optional[E]:  # noqa: D102
         return self.result().err()
 
-    def unwrap(self) -> T:
+    def unwrap(self) -> T:  # noqa: D102
         return self.result().unwrap()
 
-    def unwrap_or(self, default: T) -> T:
+    def unwrap_or(self, default: T) -> T:  # noqa: D102
         return self.result().unwrap_or(default)
 
-    def unwrap_or_else(self, op: Callable[[E], T]) -> T:
+    def unwrap_or_else(self, op: Callable[[E], T]) -> T:  # noqa: D102
         return self.result().unwrap_or_else(op)
