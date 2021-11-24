@@ -15,7 +15,7 @@ version badges:
 
 [![Project Version](https://img.shields.io/pypi/v/python-result)](https://pypi.org/project/python-result/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/python-result)](https://pypi.org/project/python-result/)
-[![Cookiecutter: cc-python](https://img.shields.io/static/v1?label=cc-python&message=2021.09.23-2&color=d4aa00&logo=cookiecutter&logoColor=d4aa00)](https://github.com/bbugyi200/cc-python)
+[![Cookiecutter: cc-python](https://img.shields.io/static/v1?label=cc-python&message=2021.10.03&color=d4aa00&logo=cookiecutter&logoColor=d4aa00)](https://github.com/bbugyi200/cc-python)
 [![Docker: bbugyi/python](https://img.shields.io/static/v1?label=bbugyi%20%2F%20python&message=2021.09.25&color=8ec4ad&logo=docker&logoColor=8ec4ad)](https://github.com/bbugyi200/docker-python)
 
 tools / frameworks used by test suite (i.e. used by `make test`):
@@ -75,6 +75,7 @@ you through the process.
   this project.
 * [CONTRIBUTING.md][7]: This document contains guidelines for developers
   interested in contributing to this project.
+* [Create a New Issue][13]: Create a new GitHub issue for this project.
 * [Documentation][1]: This project's full documentation.
 
 
@@ -90,3 +91,4 @@ you through the process.
 [10]: http://docs.python-guide.org/en/latest/starting/installation/
 [11]: https://github.com/pypa/pipx
 [12]: https://github.com/cruft/cruft
+[13]: https://github.com/bbugyi200/result/issues/new/choose

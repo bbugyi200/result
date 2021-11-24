@@ -10,8 +10,8 @@ A fully type-annotated Rust-like Result type for Python.
    :caption: Table of Contents
 
     API Reference <modules>
-    CHANGELOG <changelog>
-    CONTRIBUTING <contributing>
+    Changelog <changelog>
+    Development Guide <contributing>
     README <readme>
 
 

@@ -32,7 +32,8 @@ define runtests
 		--cov-report=term-missing \
 		--cov-branch \
 		--doctest-modules \
-		--doctest-report ndiff
+		--doctest-report ndiff \
+		# Don't remove this comment! It allows us to end the last CLI option with a backslash.
 endef
 
 .PHONY: all
@@ -135,7 +136,7 @@ check-requirements: ## Check if requirements*.txt files are up-to-date.
 
 ### Bootstraps virtual environment for first use.
 $(VENV_ACTIVATE):
-	pip install --user virtualenv
+	python3 -m pip install --user virtualenv
 	python3 -m virtualenv --python /pyenv/shims/python3.7 $(VENV)
 	$(PIP) install -U pip pip-tools
 
