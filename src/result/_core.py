@@ -206,7 +206,13 @@ class LazyResult(_ResultMixin[T, E]):
 
         self._result: Optional[Result[T, E]] = None
 
-    def result(self) -> Result[T, E]:  # noqa: D102
+    def result(self) -> Result[T, E]:
+        """Retrieve the Result object corresponding with this LazyResult.
+
+        Calls the function corresponding with this LazyResult (this function
+        will only be called once, even if this method is called multiple times)
+        and returns the same Result returned by that function.
+        """
         if self._result is None:
             self._result = self._func(*self._args, **self._kwargs)
         return self._result
