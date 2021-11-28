@@ -49,13 +49,13 @@ Examples:
     might go about calling `do_stuff()`:
 
         def main() -> int:
-            msg_r = do_stuff()  # `msg_r` is short for `msg_result`
-            if isinstance(msg_r, Err):
-                e = msg_r.err()
+            msg_result = do_stuff()
+            if isinstance(msg_result, Err):
+                e = msg_result.err()
                 logger.error("An error occurred while doing stuff: %r", e)
                 return 1
 
-            msg = msg_r.ok()
+            msg = msg_result.ok()
             logger.info(msg)
             return 0
 
