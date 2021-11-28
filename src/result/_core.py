@@ -106,7 +106,7 @@ class _ResultMixin(ABC, Generic[T, E]):
 
     @abstractmethod
     def unwrap(self) -> T:
-        """Returns real return type if successful or None otherwise."""
+        """Returns real return type or raises an exception if unsuccessful."""
 
     @abstractmethod
     def unwrap_or(self, default: T) -> T:
